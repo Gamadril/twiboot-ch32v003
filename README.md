@@ -1,7 +1,9 @@
 # twiboot-ch32v003
 ### I2C Bootloader for WCH CH32V003 (RISC-V)
 
-This is a I2C bootloader for the CH32V003, designed to be **portably built** using standard system toolchains (e.g., `apt install gcc-riscv64-unknown-elf`). The protocol spec follows the original twiboot version for AVR with one exception: all addresses are 32-bit instead of 16-bit.  
+This is a I2C bootloader for the CH32V003, designed to be **portably built** using standard system toolchains (e.g., `apt install gcc-riscv64-unknown-elf`). The protocol spec follows the original twiboot version for AVR with one exception: all addresses are 32-bit instead of 16-bit.
+
+You can use https://github.com/Gamadril/twiboot-flasher as flasher tool.
 
 ## Key Features
 - **Standalone build**: No WCH EVT/SDK required; minimal register map in [`ch32v00x.h`](ch32v00x.h)
@@ -49,6 +51,8 @@ make TWI_ADDRESS=0x27 LED_PIN=PC4 TWIBOOT_INFINITE=1 clean all
 
 ## How to Flash
 The bootloader image must be programmed once into the **System Flash** area. The included `Makefile` provides targets using `wlink`:
+> [!NOTE]
+> PR to support boot mode option byte in wlink is not yet merged. use my branch for now: https://github.com/Gamadril/wlink/tree/option_bytes or the official windows flasher tool.
 
 ```bash
 # Program to System Flash and set boot mode
